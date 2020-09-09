@@ -40,9 +40,10 @@ namespace ConsoleApp
         private static void InsertMultipleSamurais()
         {
             var samurai = new Samurai { Name = "Peter" };
-            var samurai2 = new Samurai { Name = "Peter2" };
-            context.Samurais.AddRange(samurai, samurai2 );
-
+            var samurai2 = new Samurai { Name = "Shimura" }; 
+            var samurai3 = new Samurai { Name = "Sakai" };
+            var samurai4 = new Samurai { Name = "Sasuke" };
+            context.Samurais.AddRange(samurai, samurai2, samurai3, samurai4 );
             context.SaveChanges();
         }
     }
