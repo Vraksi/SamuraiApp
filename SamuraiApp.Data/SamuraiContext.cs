@@ -16,6 +16,8 @@ namespace SamuraiApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //kan vi bruge til at undgå tracking på vores queries siden det tager computer kraft at ændre/slette tracking
+            //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             optionsBuilder.UseLoggerFactory(ConsoleLoggerFactory)
                 .UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = SamuraiAppData5");
         }
