@@ -20,15 +20,25 @@ namespace SamuraiApp.Data
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        /* for kun at kunne gøre det igennem entity framework
+        public SamuraiContext(DbContextOptions options)
+        {
+
+        }
+
+        public SamuraiContext()
+        {
+
+        }
+
+        // for kun at kunne gøre det igennem entity framework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //kan vi bruge til at undgå tracking på vores queries siden det tager computer kraft at ændre/slette tracking
             //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             optionsBuilder.UseLoggerFactory(ConsoleLoggerFactory)
-                .UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = SamuraiAppData6");
+                .UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = SamuraiTestData");
         }
-        */
+        
         //fortæller os at vi Samurai battle har en Key lavet ud af de 2 Id'er fra samurai og battle 
         //vi bruger ToTable til at fortælle hvad tabellen skal hedde vi smider dataen i
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,7 +48,7 @@ namespace SamuraiApp.Data
             //HasNoKey Bliver ALDRIG tracked 
             modelBuilder.Entity<SamuraiBattleStat>().HasNoKey().ToView("SamuraiBattleStats");
         }
-        /* En console logger der fortæller hvad vores C# kode bliver lavet om til, Altså en sql query
+        // En console logger der fortæller hvad vores C# kode bliver lavet om til, Altså en sql 
         public static readonly ILoggerFactory ConsoleLoggerFactory
             = LoggerFactory.Create(builder =>
             {
@@ -48,6 +58,6 @@ namespace SamuraiApp.Data
                 && level == LogLevel.Information)
                 .AddConsole();
             });
-        */
+        
     }
 }

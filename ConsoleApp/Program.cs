@@ -13,7 +13,7 @@ namespace ConsoleApp
 {
     internal class Program
     {
-        //private static SamuraiContext _context = new SamuraiContext();
+        private static SamuraiContext _context = new SamuraiContext();
 
         static void Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace ConsoleApp
             //GetSamurais("after add");
             //InsertBattle();
             //QueryAndUpdateBattle_Disconnected();
-            InsertNewSamuraiWithAQuote();
+            //InsertNewSamuraiWithAQuote();
             //InsertNewSamuraiWithManyQuotes();
             //AddQuoteToExistingSamuraiWhileTracked();
             //AddQuoteToExistingSamuraiNotTracked(1);
@@ -65,8 +65,20 @@ namespace ConsoleApp
             //QueryUsingRawSqlStoredProc();
             //ExecuteSomeRawSql();
 
+            InsertMultipleSamurais2();
+
             Console.Write("press key");
             Console.ReadLine();
+        }
+
+        private static void InsertMultipleSamurais2()
+        {
+            var samurai = new Samurai { Name = "Sampson" };
+            var samurai2 = new Samurai { Name = "Sampson2" };
+            var samurai3 = new Samurai { Name = "Sampson3" };
+            var samurai4 = new Samurai { Name = "Sampson4" };
+            _context.Samurais.AddRange(samurai, samurai2, samurai3, samurai4);
+            _context.SaveChanges();
         }
 
         private static void ExecuteSomeRawSql()
