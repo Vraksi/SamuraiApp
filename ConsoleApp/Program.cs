@@ -30,7 +30,7 @@ namespace ConsoleApp
             //GetSamurais("after add");
             //InsertBattle();
             //QueryAndUpdateBattle_Disconnected();
-            //InsertNewSamuraiWithAQuote();
+            InsertNewSamuraiWithAQuote();
             //InsertNewSamuraiWithManyQuotes();
             //AddQuoteToExistingSamuraiWhileTracked();
             //AddQuoteToExistingSamuraiNotTracked(1);
@@ -56,10 +56,56 @@ namespace ConsoleApp
             //GetHorseWithSamurai();
             //GetSamuraiWithClan();
             //UpdateSamuraiClan();
-            GetClanWithSamurais();
+            //GetClanWithSamurais();
+
+
+            //QuerySamuraiBattleStats();
+            //QueryUsingRawSql();
+            //QueryUsingRawSqlWithInterpolation();
+            //QueryUsingRawSqlStoredProc();
+            ExecuteSomeRawSql();
 
             Console.Write("press key");
             Console.ReadLine();
+        }
+
+        private static void ExecuteSomeRawSql()
+        {
+            var samuraiId = 1;
+            var x = _context.Database.ExecuteSqlRaw("EXEC DeleteQuotesForSamurai {0}", samuraiId);
+            var samuraiId1 = 1;
+            var y = _context.Database.ExecuteSqlInterpolated($"EXEC DeleteQuotesForSamurai {samuraiId}");
+        }
+
+        private static void QueryUsingRawSqlStoredProc()
+        {
+            var text = "come";
+            var samurais = _context.Samurais.FromSqlInterpolated(
+                $"EXEC dbo.SamuraiWhoSaidAWord {text}").ToList();
+        }
+
+        private static void QueryUsingRawSqlWithInterpolation()
+        {
+            //interpolation for gemme data fra folk
+            string name = "kodawkopdaw";
+            var samurais = _context.Samurais
+                .FromSqlInterpolated($"SELECT * FROM Samurais WHERE Name = {name}")
+                .ToList();                
+        }
+
+        private static void QueryUsingRawSql()
+        {
+            //RAW for at undgå sql injections
+            var samurais = _context.Samurais.FromSqlRaw("SELECT Id, Name, ClanId FROM Samurais").Include(s => s.Quotes).ToList();
+        }
+
+        private static void QuerySamuraiBattleStats()
+        {
+            //var stats = _context.SamuraiBattleStats.ToList();
+            //var firstStat = _context.SamuraiBattleStats.FirstOrDefault();
+            //var sampsonStat = _context.SamuraiBattleStats
+            //    .Where(s => s.Name == "kodawkopdaw");
+            var findone = _context.SamuraiBattleStats.Find(2); // giver ikke mening fordi find leder efter en primary key og der findes ikke en i vores tabel
         }
 
         private static void UpdateSamuraiClan()

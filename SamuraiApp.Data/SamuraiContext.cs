@@ -13,13 +13,14 @@ namespace SamuraiApp.Data
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Clan> Clans { get; set; }
         public DbSet<Battle> Battles { get; set; }
+        public DbSet<SamuraiBattleStat> SamuraiBattleStats { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //kan vi bruge til at undgå tracking på vores queries siden det tager computer kraft at ændre/slette tracking
             //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             optionsBuilder.UseLoggerFactory(ConsoleLoggerFactory)
-                .UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = SamuraiAppData5");
+                .UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = SamuraiAppData6");
         }
         //fortæller os at vi Samurai battle har en Key lavet ud af de 2 Id'er fra samurai og battle 
         //vi bruger ToTable til at fortælle hvad tabellen skal hedde vi smider dataen i
@@ -27,6 +28,8 @@ namespace SamuraiApp.Data
         {
             modelBuilder.Entity<SamuraiBattle>().HasKey(s => new { s.SamuraiId, s.BattleId });
             modelBuilder.Entity<Horse>().ToTable("Horses");
+            //HasNoKey Bliver ALDRIG tracked 
+            modelBuilder.Entity<SamuraiBattleStat>().HasNoKey().ToView("SamuraiBattleStats");
         }
 
         public static readonly ILoggerFactory ConsoleLoggerFactory
