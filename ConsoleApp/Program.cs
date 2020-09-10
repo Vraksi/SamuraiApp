@@ -66,19 +66,35 @@ namespace ConsoleApp
             //ExecuteSomeRawSql();
 
             InsertMultipleSamurais2();
-
+            GetSamurais("dw");
             Console.Write("press key");
             Console.ReadLine();
         }
+        /*
+        private static int AddMultipleSamurais(string[] nameList)
+        {
+            var samuraiList = new List<Samurai>();
+            foreach (var name in nameList)
+            {
+                samuraiList.Add(new Samurai { Name = name});
+            }
+            _context.AddRange(samuraiList);
 
+            var dbresult = _context.SaveChanges();
+            return dbresult;
+        }
+        */
         private static void InsertMultipleSamurais2()
         {
-            var samurai = new Samurai { Name = "Sampson" };
-            var samurai2 = new Samurai { Name = "Sampson2" };
-            var samurai3 = new Samurai { Name = "Sampson3" };
-            var samurai4 = new Samurai { Name = "Sampson4" };
-            _context.Samurais.AddRange(samurai, samurai2, samurai3, samurai4);
-            _context.SaveChanges();
+            //var samurai = new Samurai { Name = "Sampson" };
+            //var samurai2 = new Samurai { Name = "Sampson2" };
+            //var samurai3 = new Samurai { Name = "Sampson3" };
+            //var samurai4 = new Samurai { Name = "Sampson4" };
+            var _bizdata = new BusinessDataLogic();
+            var samuraiNames = new string[] { "Sampson", "Sampson2", "Sampson3", "Sampson4" };
+            var newSamuraIsCreated = _bizdata.AddMultipleSamurais(samuraiNames);
+            //_context.Samurais.AddRange(samurai, samurai2, samurai3, samurai4);
+            //_context.SaveChanges();
         }
 
         private static void ExecuteSomeRawSql()

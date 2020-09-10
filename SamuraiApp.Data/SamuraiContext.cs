@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SamuraiAppDomain;
+using SamuraiApp.Data;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
