@@ -13,7 +13,7 @@ namespace ConsoleApp
 {
     internal class Program
     {
-        private static SamuraiContext _context = new SamuraiContext();
+        //private static SamuraiContext _context = new SamuraiContext();
 
         static void Main(string[] args)
         {
@@ -63,7 +63,7 @@ namespace ConsoleApp
             //QueryUsingRawSql();
             //QueryUsingRawSqlWithInterpolation();
             //QueryUsingRawSqlStoredProc();
-            ExecuteSomeRawSql();
+            //ExecuteSomeRawSql();
 
             Console.Write("press key");
             Console.ReadLine();
